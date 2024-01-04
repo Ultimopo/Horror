@@ -2,32 +2,40 @@ using UnityEngine;
 
 public class PageManager : MonoBehaviour
 {
-	public Enemy enemy;
-	public int pagesCollected = 0;
+    public int pages;
+    public Enemy enemy;
+    public AudioSource source;
 
-	void OnTriggerEnter(Collider other)
-	{
-		print("page collected");
-		Destroy(other.gameObject);
+    void OnTriggerEnter(Collider other)
+    {
 
-		pagesCollected++;
+        Destroy(other.gameObject);
+        pages++;
 
-		if (pagesCollected == 1)
-		{
-			enemy.target = transform;
-		}
-
-		if (pagesCollected == 2)
-		{
-			enemy.speed *= 2;
-		}
-
-		if (pagesCollected == 3)
-		{
-			enemy.viewRange = 15;
-		}
-
-		// ADD 2 PAGES
-		// PAGE 5 enables second enemy
-	}
+        if (pages == 1)
+        {
+            enemy.target = transform;
+        }
+        if (pages == 2)
+        {
+            enemy.speed *= 2;
+        }
+        if (pages == 3)
+        {
+            enemy.viewDistance *= 2;
+            source.Play();
+        }
+        if (pages == 4)
+        {
+            enemy.speed *= 2;
+            source.Play();
+        }
+        if (pages == 5)
+        {
+            enemy.speed *= 2;
+            enemy.viewDistance *= 100;
+            source.Play();
+        }
+    }
+    
 }
